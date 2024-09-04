@@ -1,0 +1,358 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    top: 0;
+}
+body{
+  
+    color: #030336;
+    font-family: 'Rubik';
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .loader {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 10px solid #030336;
+    border-top: 10px solid transparent;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+.container{
+    padding: 10px 10%;
+    font-size: 20px;
+}
+header{
+    padding: 10px 10%;
+    position: fixed;
+    width: 100%;
+    background-color: #030336;
+    font-family: 'Rubik';
+}
+.logo{
+    color: #f7cb48;
+    font-size: 20px;
+    font-family: "Nerko one";
+}
+nav{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+nav ul li{
+    font-size: 24px;
+    list-style: none;
+    display: inline;
+    margin: 10px 20px;
+}
+nav ul li a{
+    color: #f7cb48;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+nav ul li a:hover{
+    color: #fff;
+    text-decoration: none;
+}
+.nav-toggle{
+  display: none;
+}
+#nav-links{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.hdtxt{
+    text-align: center;
+    background-image: url(images/reader-8211917_640.png);
+    
+}
+.row{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 7%;
+   
+}
+.col-1{
+    flex-basis: 35%;
+}
+h1{
+    color: #030336;
+}
+label{
+    display: block;
+    font-size: 18px;
+}
+.box-1{
+    width: 240px;
+    height: 30px;
+    text-align: center;
+    border-radius: 6px;
+    border:  none;
+    font-size: medium;
+    box-shadow: 3px;
+    margin-top: 0;
+    box-shadow: rgba(0, 0, 0, 0.28) 0px 2px 4px 1px;
+}
+
+#display-result {
+    display: none;
+    margin-top: 1rem;
+    font-weight: bold;
+    background-color: #fff;
+    width: fit-content;
+    height: 2rem;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.error-card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f44336;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: block;
+  }
+  
+  .error-card h4 {
+    margin-top: 0;
+  }
+  
+  .error-card button {
+    background-color: #fff;
+    color: #f44336;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .error-card button:hover {
+    background-color: #f44336;
+    color: #fff;
+  }
+
+button{
+    margin-top: 12px;
+    width: 120px;
+    height: 30px;
+    border-radius: px;
+    border: none;
+    background-color: #f7cb48;
+    color: #031b4c;
+    cursor: pointer;
+    font-weight: 700;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+#add{
+  width: 4rem;
+}
+#reset{
+  width: 4rem;
+}
+.btn_2{
+    width: 240px ;
+}
+.btn_2:hover{
+    background-color: #031b4c;
+    color: #f7cb48;
+}
+.btn_3{
+    background-color: #031b4c;
+    color: #f7cb48;
+}
+button:hover{
+    background-color: #031b4c;
+    color: #f7cb48;
+}
+.col-2{
+    margin-top:0;
+    flex-basis: 50%;
+}
+table{
+    box-shadow: rgba(0, 0, 0, 0.28) 0px 2px 4px 1px;
+    margin-top: 4rem;
+    border: 4px #030336;
+    border-collapse: collapse;
+    border-radius: 5px;
+    width: 25rem;
+    
+}
+tr{
+  box-shadow: rgba(0, 0, 0, 0.28) 0px 2px 4px 1px;
+
+}
+th, td{
+    height: 2.5rem;
+    padding: 5px;
+    text-align: center;
+    font-size: 16px;
+    background-color: #fff;
+    column-gap: 70%;
+    gap: 2px;
+    color: #030336;
+}
+
+.table-input {
+    width: 100%; /* make input fields fill the table data area */
+    border: none; /* remove border */
+    text-align: center;
+    padding: 5px; /* add some padding for better appearance */
+    background-color: #fff; /* set a light gray background */
+  }
+  
+  .table-input:focus {
+    background-color: #fff; /* change background color on focus */
+    outline: none; /* remove outline */
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.animate-table {
+    transition: transform 0.5s;
+  }
+  
+  .animate-table.spin {
+    animation: spin 3s linear;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+.form_control {
+    transition: 0.3s ease-in-out;
+}
+footer{
+    margin-top: 5%;
+    background-color: #f0f0f0;
+    color: #031b4c;
+    width: 100%;
+    padding-top: 5%;
+    display: block;
+}
+footer  i{
+  color: #030336;
+  font-size: 2rem;
+}
+/* Add this to your CSS file */
+
+.print-mode {
+    visibility: hidden;
+}
+
+.print-mode .print,
+.print-mode #display-result {
+    visibility: visible;
+}
+
+.print-mode .print {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+/* for media query, set table margin to be auto
+
+/* Tablet and small desktop screens */
+@media only screen and (max-width: 768px) {
+    /* Adjust font sizes, margins, and padding */
+    body {
+      font-size: 16px;
+    }
+    .main{
+      margin-top: 10%;
+    }
+    .container {
+      margin: 20px;
+      padding: 20px;
+    }
+    .nav-toggle{
+      display: block;
+    }
+    #nav-links{
+      display: none;
+    }
+    #nav-links.show{
+      display: block;
+    }
+    .nav-toggle button{
+      background-color: #030336;
+      color: #f7cb48;
+      border: none;
+      width: 3rem;
+      padding: 10%;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .nav-toggle button:hover{
+      background-color: #f7cb48;
+      color: #031b4c;
+  }
+}
+  
+  /* Mobile phones */
+  @media only screen and (max-width: 480px) {
+    /* Adjust font sizes, margins, and padding */
+    body {
+      font-size: 14px;
+    }
+    .container {
+      margin: 10px;
+      padding: 10px;
+    }
+  }
+  
+  /* Smaller mobile phones */
+  @media only screen and (max-width: 320px) {
+    /* Adjust font sizes, margins, and padding */
+    body {
+      font-size: 12px;
+    }
+    .container {
+      margin: 5px;
+      padding: 5px;
+    }
+  }

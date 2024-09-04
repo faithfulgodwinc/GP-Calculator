@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width initial-scale=1.0">
+       
+        <title>STUaid</title>
+        <meta name="description" content="A tool to assist students with result GP and CGP alculations">
+        <meta name="author" content="Faithful C. Godwin">
+
+        <meta property="og:title" title="STUaid">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="">
+        <meta property="og:image" content="image" href="##########">
+
+        <meta name="og:description" content="FaithCalc GP Calculator Website">
+        <meta name="og:locale" content="en_US">
+        <meta name="og:site_name" content="Faith Calc">
+    
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap">
+        <link rel="stylesheet" href="style.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Nerko+One&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Nerko+One&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    </head>
+        <script src="https://kit.fontawesome.com/a8c4decf06.js" crossorigin="anonymous"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+        <script src="functionality.js" ></script>
+    <body>
+ 
+        <div class="preloader">
+            <div class="loader"></div>
+        </div> 
+        <header>
+            <div id="head">
+                    <nav>
+                        <div class="logo">
+                            <h2>STUaid</h2>
+                        </div>
+                        <ul id="nav-links">
+                            <li><a href="index.html">GP Calculator</a></li>
+                           <li><a  href="#talk">Talk to Developer</a></li>
+                        </ul>
+                        <div class="nav-toggle">
+                            <button id="nav-toggle-button" onclick="toggleNavLinks()">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                        </div>
+                    </nav>
+            </div>
+        
+        </header>
+    
+        <main>
+            <div class="main">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-1">
+                            <h1 id="one">GPA Calculator</h1>
+                                <label for="">Grading Scale:</label>
+                                <input class="box-1" name="scale" required list="scale" placeholder="Enter Scale">
+                                <datalist id="scale">
+                                    <option value="5.0">5.0</option>
+                                    <option value="4.0">4.0</option>
+                                    <option value="3.0">3.0</option>
+                                    <option value="2.0">2.0</option>
+                                </datalist>
+                                <label>Number of courses:</label>
+                                <input class="box-1" id="courses" type="number" min="1"  name="courses" placeholder="total no. of courses"><br>
+                                <button type="submit" id="first" onclick="generateTable()" >Create Table</button>
+                             </div>
+                        <div class="col-2">
+                                <table class="print animate-table">
+                                    <thead>
+                                        <tr>
+                                            <th>S/N</th>
+                                            <th>Course</th>
+                                            <th>Unit/hours</th>
+                                            <th>Grade</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table_body">
+                                        <tr>
+                                            
+                                            <td>1</td>
+                                            <td>
+                                                <input type="text" class="table-input">
+                                            </td>
+                                            <td>
+                                                <input type="number" min="1" class="table-input">
+                                            </td>
+                                            <td>
+                                                <input  type="text"  maxlength="1" class="table-input">
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                       
+                                </table>
+                                <div id="display-result"></div>
+                                <button onclick="create_tr('table_body') " id="add"><i class="fa-solid fa-plus"></i></button>
+
+                                <button class="btn_3" id="display" onclick="Result()">
+                                Calculate GPA
+                                </button>
+                                <button class="btn_3" id="reset" onclick="Reset()"><i class="fa-solid fa-rotate"></i></button>
+                            <br>
+                            <button id="print" class="btn_2" onclick="Print()">
+                                Print Unofficial Transcript
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!--section-->
+            <article>
+                <div class="container">
+                    <h3 >Here's how it works</h3>
+                    <h5>Step 1:</h5>
+                    <p>Input your school's grading scale</p>
+                    <h5>Step 2:</h5>
+                    <p>Input your total number of courses</p>
+                    <h5>Step 3:</h5>
+                    <p>Click "Create table"</p>
+                    <h5>Step 4:</h5>
+                    <p>Fill in the table appropriately</p>
+                    <h5>Step 5:</h5>
+                    <p>Click "Calculate GPA"<br> And there you go!</p>
+                </div>
+            </article>
+
+          
+        </main>
+        <footer>
+            <div class="container" id="talk">
+                <h2>Talk to Developer</h2><br>
+                Contact us:<br>
+                <a href="mailto:godwinfaithful.20211259745@futo.edu.ng">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/faithful-godwin" target="_blank">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+            </div>
+            <p style="text-align: center; color: #9c9c9c;">Copyright 2024 Faithful C. Godwin <br> All rights reserved.</p>
+        </footer>
+    </body>
+    
+
+</html>
