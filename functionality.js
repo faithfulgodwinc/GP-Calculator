@@ -302,11 +302,6 @@ function create_tr(table_body) {
             // Close the print window
             printWindow.close();
           }
-
-// // alert("insert og:url meta tag");
-// // console.log("Welcome")
-// // alert("why?")zz
-
 // Get the nav-toggle button and the nav-links
 const navToggle = document.getElementById('nav-toggle-button');
 const navLinks = document.getElementById('nav-links');
