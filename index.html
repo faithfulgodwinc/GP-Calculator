@@ -51,7 +51,7 @@
                         </ul>
                         <div class="nav-toggle">
                             <button id="nav-toggle-button" onclick="toggleNavLinks()">
-                                <i class="fas fa-bars"></i>
+                                <i class="fas fa-bars" id="nav-icon"></i>
                             </button>
                         </div>
                     </nav>
@@ -100,6 +100,9 @@
                                             <td>
                                                 <input  type="text"  maxlength="1" class="table-input">
                                             </td>
+                                            <td>
+                                                <button class="delete-button">Remove</button>
+                                            </td>
                                         </tr>
                                         </tbody>
                                        
@@ -137,7 +140,12 @@
                 </div>
             </article>
 
-          
+            <!-- <audio id="background-music" autoplay>
+                <source src="morning-garden-acoustic-chill-15013.mp3" type="audio/mp3">
+            </audio>
+            <button id="music-toggle" >
+                <i class="fa-solid fa-music" id="music-icon"></i>
+            </button> -->
         </main>
         <footer>
             <div class="container" id="talk">
@@ -152,7 +160,31 @@
             </div>
             <p style="text-align: center; color: #9c9c9c;">Copyright 2024 Faithful C. Godwin <br> All rights reserved.</p>
         </footer>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              const audio = document.createElement('audio');
+              audio.id = 'background-music-2';
+              audio.src = 'morning-garden-acoustic-chill-15013.mp3';
+              audio.autoplay = true;
+              audio.loop = true;
+              document.body.appendChild(audio);
+              audio.play();
+          
+              const musicToggle = document.createElement('button');
+              musicToggle.innerHTML = '<i class="fa-solid fa-music"></i>';
+              musicToggle.style = 'position: fixed; top: 80%; right: 14px; background-color: transparent; color: #031b4c; border: none; cursor: pointer;';
+              document.body.appendChild(musicToggle);
+          
+              musicToggle.addEventListener('click', function() {
+                if (audio.paused) {
+                  audio.play();
+                } else {
+                  audio.pause();
+                }
+              });
+            });
+          </script>
     </body>
-    
 
 </html>

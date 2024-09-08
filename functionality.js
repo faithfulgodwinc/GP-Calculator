@@ -1,40 +1,57 @@
 
 window.addEventListener('load', function() {
   const preloader = document.querySelector('.preloader');
-  preloader.classList.add('loaded');
+  const text = 'Welcome to STUaid';
+  let index = 0;
+
+function type() {
+  const char = text[index];
+  preloader.textContent += char;
+  index++;
+  if (index < text.length) {
+    setTimeout(type, 50); // adjust the speed of typing
+  } else {
   setTimeout(function() {
-    preloader.remove();
-  }, 2000);
+  preloader.classList.add('loaded');
+    setTimeout(function() {
+  preloader.remove();
+        }, 2000);
+    }, 500); // wait for 500ms before removing the preloader
+  }
+}
+
+type();
 });
 
+
 function generateTable() {
-   // Check if a grading scale has been selected
-   var scale = document.querySelector('input[name="scale"]').value;
-   if (scale === '') {
-     // Display error message as a card
-     var errorMessage = document.getElementById('error-message');
-     if (!errorMessage) {
-       errorMessage = document.createElement('div');
-       errorMessage.id = 'error-message';
-       errorMessage.classList.add('error-card');
-       document.body.appendChild(errorMessage);
-     }
-     errorMessage.innerHTML = `
-       <h4>Oops!</h4>
-       <p>Please select a grading scale before generating the table.</p>
-       <button id="close-error">Close</button>
-     `;
-     document.getElementById('close-error').addEventListener('click', function() {
-       errorMessage.style.display = 'none';
-     });
-     return;
+  // Check if a grading scale has been selected
+  var scale = document.querySelector('input[name="scale"]').value;
+  if (scale === '') {
+    // Display error message as a card
+    var errorMessage = document.getElementById('error-message');
+    if (!errorMessage) {
+      errorMessage = document.createElement('div');
+      errorMessage.id = 'error-message';
+      errorMessage.classList.add('error-card');
+      document.body.appendChild(errorMessage);
     }
+    errorMessage.innerHTML = `
+      <h4>Oops!</h4>
+      <p>Please select a grading scale before generating the table.</p>
+      <button id="close-error">Close</button>
+      `;
+    document.getElementById('close-error').addEventListener('click', function () {
+    errorMessage.style.display = 'none';
+    });
+    return;
+  }
 
   // Get the number of courses from the input field
   let courses = document.getElementById('courses').value;
 
   // Get the tbody element
-  let tbody = document.getElementById('table_body');
+  let tbody = document.getElementById('table_body');  
 
   // Clear any existing rows from the tbody
   tbody.innerHTML = '';
@@ -47,10 +64,30 @@ function generateTable() {
       <td><input type="text" class="table-input"></td>
       <td><input type="number" min="1" class="table-input"></td>
       <td><input type="text" maxlength="1" class="table-input"></td>
+      <td><button class="delete-button">Remove</button></td>
     `;
     tbody.appendChild(row);
   }
+
+  // Add event listener to each delete button
+  const deleteButtons = tbody.querySelectorAll('.delete-button');
+  deleteButtons.forEach((button) => {
+    button.addEventListener('click', (e) => {
+      const row = e.target.parentNode.parentNode;
+      row.remove();
+      updateSerialNumber();
+    });
+  });  
 }
+
+
+function updateSerialNumber() {
+  const rows = document.getElementById('table_body').children;
+  for (let i = 0; i < rows.length; i++) {
+    rows[i].children[0].textContent = i + 1;
+  }
+}
+
 
 const inputs = document.querySelectorAll('.table-input');
 
@@ -64,26 +101,26 @@ inputs.forEach((input, index) => {
 });
 
 function Result() {
-   // Check if a grading scale has been selected
-   var scale = document.querySelector('input[name="scale"]').value;
-   if (scale === '') {
-     // Display error message as a card
-     var errorMessage = document.getElementById('error-message');
-     if (!errorMessage) {
-       errorMessage = document.createElement('div');
-       errorMessage.id = 'error-message';
-       errorMessage.classList.add('error-card');
-       document.body.appendChild(errorMessage);
-     }
-     errorMessage.innerHTML = `
-       <h4>Oops!</h4>
-       <p>Please select a grading scale before calculating the GPA.</p>
-       <button id="close-error">Close</button>
-     `;
-     document.getElementById('close-error').addEventListener('click', function() {
-       errorMessage.style.display = 'none';
-     });
-     return;
+  // Check if a grading scale has been selected
+  var scale = document.querySelector('input[name="scale"]').value;
+    if (scale === '') {
+      // Display error message as a card
+      var errorMessage = document.getElementById('error-message');
+      if (!errorMessage) {
+        errorMessage = document.createElement('div');
+        errorMessage.id = 'error-message';
+        errorMessage.classList.add('error-card');
+        document.body.appendChild(errorMessage);
+      }
+      errorMessage.innerHTML = `
+        <h4>Oops!</h4>
+        <p>Please select a grading scale before calculating the GPA.</p>
+        <button id="close-error">Close</button>
+      `;
+      document.getElementById('close-error').addEventListener('click', function() {
+        errorMessage.style.display = 'none';
+      });
+      return;
     }
 
   var scale = document.querySelector('input[name="scale"]').value;
@@ -161,22 +198,22 @@ function Result() {
 
       totalUnits += unitValue;
       totalPoints += unitValue * gradeValue;
-            }
+      }
 
-            var gpa = totalPoints / totalUnits;
-            var resultElement = document.getElementById('display-result');
-            if (!resultElement) {
-                resultElement = document.createElement('h4');
-                resultElement.id = 'display-result';
-                document.querySelector('.main').appendChild(resultElement);
-            }
-            resultElement.innerText = 'Your GPA is: ' + gpa.toFixed(2);
-            resultElement.style.display = 'block';
+      var gpa = totalPoints / totalUnits;
+      var resultElement = document.getElementById('display-result');
+      if (!resultElement) {
+        resultElement = document.createElement('h4');
+        resultElement.id = 'display-result';
+        document.querySelector('.main').appendChild(resultElement);
+      }
+      resultElement.innerText = 'Your GPA is: ' + gpa.toFixed(2);
+      resultElement.style.display = 'block';
        
-            // Remove the "Add Course" and "Calculate GP" buttons
-            document.querySelector('#display').style.display = 'none';
-            document.querySelector('button[onclick="create_tr(\'table_body\')"]').style.display = 'none';
-            }
+      // Remove the "Add Course" and "Calculate GP" buttons
+      document.querySelector('#display').style.display = 'none';
+      document.querySelector('button[onclick="create_tr(\'table_body\')"]').style.display = 'none';
+      }
 
 
 function create_tr(table_body) {
@@ -202,118 +239,136 @@ function create_tr(table_body) {
       return;
     }
 
-            const table = document.getElementById(table_body);
-            const row = document.createElement('tr');
-            row.innerHTML = `
-              <td>
-                ${table.rows.length + 1}
-              </td>
-              <td>
-                <input type="text" class="table-input">
-              </td>
-              <td>
-                <input type="number" min="1" class="table-input">
-              </td>
-              <td>
-                <input type="text" maxlength="1" class="table-input">
-              </td>
-            `;
-            table.appendChild(row);
-          }
-          
-          function Reset() {
-            // Get the table body
-            var tableBody = document.getElementById('table_body');
-          
-            // Remove all rows from the table body
-            while (tableBody.rows.length > 0) {
-              tableBody.deleteRow(0);
-            }
-          
-            // Create a new row in the table body
-            var row = tableBody.insertRow(0);
-          
-            // Create cells in the new row
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
-            var cell4 = row.insertCell(3);
-          
-            // Add content to the cells
-            cell1.textContent = '1';
-            cell2.innerHTML = '<input type="text" class="table-input">';
-            cell3.innerHTML = '<input type="number" min="1" class="table-input">';
-            cell4.innerHTML = '<input type="text" maxlength="1" class="table-input">';
-          
-            // Clear the display result
-            document.getElementById('display-result').textContent = '';
-          
-            // Clear the input fields
-            document.getElementById('courses').value = '';
-            document.querySelector('input[name="scale"]').value = '';
+    const table = document.getElementById(table_body);
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>
+        ${table.rows.length + 1}
+      </td>
+      <td>
+        <input type="text" class="table-input">
+      </td>
+      <td>
+        <input type="number" min="1" class="table-input">
+      </td>
+      <td>
+        <input type="text" maxlength="1" class="table-input">
+      </td>
+       <td>
+        <button class="delete-button">Remove</button>
+      </td>
+    `;
+    table.appendChild(row);
 
-            // show Calculate GP button
-            document.querySelector('#display').style.display = 'inline';
-          }
+    // Add event listener to the delete button
+    const deleteButton = row.querySelector('.delete-button');
+    deleteButton.addEventListener('click', (e) => {
+    const row = e.target.parentNode.parentNode;
+    row.remove();
+    updateSerialNumber();
+  });
+}
+          
+function Reset() {
+  // Get the table body
+  var tableBody = document.getElementById('table_body');
 
-          function Print() {
-            // Get the table and result elements
-            var table = document.getElementById('table_body');
-            var resultElement = document.getElementById('display-result');
-          
-            // Create a new window for printing
-            var printWindow = window.open('', '', 'height=500,width=700');
-          
-            // Create a new table in the print window
-            var printTable = document.createElement('table');
-            printTable.innerHTML = `
-              <tr>
-                <th>S/N</th>
-                <th>Course</th>
-                <th>Unit/hours</th>
-                <th>Grade</th>
-              </tr>
-            `;
-          
-            // Add rows to the print table
-            for (var i = 0; i < table.rows.length; i++) {
-              var row = table.rows[i];
-              var printRow = document.createElement('tr');
-              printRow.innerHTML = `
-                <td>${row.cells[0].textContent}</td>
-                <td>${row.cells[1].children[0].value}</td>
-                <td>${row.cells[2].children[0].value}</td>
-                <td>${row.cells[3].children[0].value}</td>
-              `;
-              printTable.appendChild(printRow);
-            }
-          
-            // Add the result to the print window
-            var printResult = document.createElement('h4');
-            printResult.textContent = resultElement.textContent;
-          
-            // Add the print table and result to the print window
-            printWindow.document.body.appendChild(printTable);
-            printWindow.document.body.appendChild(printResult);
-          
-            // Print the print window
-            printWindow.print();
-          
-            // Close the print window
-            printWindow.close();
-          }
+  // Remove all rows from the table body
+  while (tableBody.rows.length > 0) {
+    tableBody.deleteRow(0);
+  }
+
+  // Create a new row in the table body
+  var row = tableBody.insertRow(0);
+
+  // Create cells in the new row
+  var cell1 = row.insertCell(0);
+  var cell2 = row.insertCell(1);
+  var cell3 = row.insertCell(2);
+  var cell4 = row.insertCell(3);
+
+  // Add content to the cells
+  cell1.textContent = '1';
+  cell2.innerHTML = '<input type="text" class="table-input">';
+  cell3.innerHTML = '<input type="number" min="1" class="table-input">';
+  cell4.innerHTML = '<input type="text" maxlength="1" class="table-input">';
+
+  // Clear the display result
+  document.getElementById('display-result').textContent = '';
+
+  // Clear the input fields
+  document.getElementById('courses').value = '';
+  document.querySelector('input[name="scale"]').value = '';
+
+  // show Calculate GP button
+  document.querySelector('#display').style.display = 'inline';
+}
+
+function Print() {
+  // Get the table and result elements
+  var table = document.getElementById('table_body');
+  var resultElement = document.getElementById('display-result');
+
+  // Create a new window for printing
+  var printWindow = window.open('', '', 'height=500,width=700');
+
+  // Create a new table in the print window
+  var printTable = document.createElement('table');
+  printTable.innerHTML = `
+    <tr>
+      <th>S/N</th>
+      <th>Course</th>
+      <th>Unit/hours</th>
+      <th>Grade</th>
+    </tr>
+  `;
+
+  // Add rows to the print table
+  for (var i = 0; i < table.rows.length; i++) {
+    var row = table.rows[i];
+    var printRow = document.createElement('tr');
+    printRow.innerHTML = `
+      <td>${row.cells[0].textContent}</td>
+      <td>${row.cells[1].children[0].value}</td>
+      <td>${row.cells[2].children[0].value}</td>
+      <td>${row.cells[3].children[0].value}</td>
+    `;
+    printTable.appendChild(printRow);
+  }
+
+  // Add the result to the print window
+  var printResult = document.createElement('h4');
+  printResult.textContent = resultElement.textContent;
+
+  // Add the print table and result to the print window
+  printWindow.document.body.appendChild(printTable);
+  printWindow.document.body.appendChild(printResult);
+
+  // Print the print window
+  printWindow.print();
+
+  // Close the print window
+  printWindow.close();
+}
+
 // Get the nav-toggle button and the nav-links
 const navToggle = document.getElementById('nav-toggle-button');
 const navLinks = document.getElementById('nav-links');
 
 function toggleNavLinks() {
   const navLinks = document.getElementById('nav-links');
-  if (navLinks) {
-    navLinks.classList.toggle('show');
+  const navIcon = document.getElementById('nav-icon');
+  
+  navLinks.classList.toggle('show-nav-links');
+  
+  if (navIcon.classList.contains('fa-bars')) {
+      navIcon.classList.remove('fa-bars');
+      navIcon.classList.add('fa-xmark');
+      navLinks.classList.toggle('show');
+
   } else {
-    console.error('navLinks element not found');
+      navIcon.classList.remove('fa-xmark');
+      navIcon.classList.add('fa-bars');
+      navLinks.classList.remove('show');
   }
 }
-
-// Add an event listener to the nav-toggle button
-navToggle.addEventListener('click', toggleNavLinks);
